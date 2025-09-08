@@ -4,7 +4,7 @@ import com.example.demo.domain.model.Member;
 
 import java.util.Optional;
 
-public interface MemberProt {
+public interface MemberPort {
     Optional<Member> findByEmail(String email);
     Member save(Member member);
 }

@@ -1,9 +1,10 @@
 package com.example.demo.application.sevice;
-
 import com.example.demo.domain.model.Member;
 import com.example.demo.domain.port.in.RegisterMemberUseCase;
+import com.example.demo.domain.port.out.MemberPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -13,6 +14,15 @@ public class RegisterMemberService implements RegisterMemberUseCase {
 
     @Override
     public Member registerMember(RegisterMemberCommand command){
+        memberPort.findByEmail(command.email()).ifPresent(member -> {
+            throw new IllegalStateException("이미 존재하는 이메일입니다.");
+        });
 
+        Member newMember = Member.withoutId(
+                command.email(),
+                command.password(),
+                command.userName()
+        );
+        return memberPort.save(newMember);
     }
 }
