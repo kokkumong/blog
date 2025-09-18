@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class RegisterMemberService implements RegisterMemberUseCase {
+public class   RegisterMemberService implements RegisterMemberUseCase {
     private final MemberPort memberPort;
 
     @Override
