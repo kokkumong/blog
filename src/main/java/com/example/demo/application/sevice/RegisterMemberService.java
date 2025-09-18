@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class RegisterMemberService implements RegisterMemberUseCase {
     private final MemberPort memberPort;
-
     @Override
     public Member registerMember(RegisterMemberCommand command){
         memberPort.findByEmail(command.email()).ifPresent(member -> {
